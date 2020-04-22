@@ -14,7 +14,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    var targetUrl = "https://jsonplaceholder.typicode.com/users";
+    fetch(proxyUrl + targetUrl)
       .then((res) => res.json())
       .then((users) => this.setState({ rappers: users }));
   }
