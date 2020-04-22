@@ -19,16 +19,22 @@ class App extends Component {
       .then((users) => this.setState({ rappers: users }));
   }
 
+  handleChange = (e) => { // lex-scoping?? with arrow functions
+    this.setState({ searchField: e.target.value });
+  };
+
   render() {
     const { rappers, searchField } = this.state; //destructuring
     const filtRappers = rappers.filter((rapper) =>
       rapper.name.toLowerCase().includes(searchField.toLowerCase())
     );
+
     return (
       <div className="App">
+        <h1>Rappers Rolodex</h1>
         <SearchBox
           placeholder="search rappers"
-          handleChange={(e) => this.setState({ searchField: e.target.value })}
+          handleChange={this.handleChange}
         />
         <CardList rappers={filtRappers} />
       </div>
